@@ -1,0 +1,125 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Pick_AddressAttributes.Exclude_keyofAddressAttributes.defaultExcludeAttributesType__": {
+				"properties": {
+					"addressUid": {
+						"type": "string"
+					},
+					"line1": {
+						"type": "string"
+					},
+					"line2": {
+						"type": "string"
+					},
+					"line3": {
+						"type": "string"
+					},
+					"city": {
+						"type": "string"
+					},
+					"stateProvince": {
+						"type": "string"
+					},
+					"postalCode": {
+						"type": "string"
+					},
+					"country": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"addressUid"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"AddressResponse": {
+				"properties": {
+					"addressUid": {
+						"type": "string"
+					},
+					"line1": {
+						"type": "string"
+					},
+					"line2": {
+						"type": "string"
+					},
+					"line3": {
+						"type": "string"
+					},
+					"city": {
+						"type": "string"
+					},
+					"stateProvince": {
+						"type": "string"
+					},
+					"postalCode": {
+						"type": "string"
+					},
+					"country": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"addressUid"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "tsoa-heritage-type-api",
+		"version": "0.0.1",
+		"description": "tsoa-heritage-type-api",
+		"license": {
+			"name": "SEE LICENSE IN LICENSE"
+		},
+		"contact": {
+			"name": "daniel.m.pomerantz@jci.com"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/addressess/{addressId}": {
+			"get": {
+				"operationId": "getAddress",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AddressResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "addressId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
