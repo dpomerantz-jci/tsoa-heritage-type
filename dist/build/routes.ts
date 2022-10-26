@@ -4,21 +4,18 @@
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse, fetchMiddlewares } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { AddressController } from './../controllers/addressController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { PhoneNumberController } from './../controllers/phoneNumberController';
 import type { RequestHandler } from 'express';
 import * as express from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-    "Pick_AddressAttributes.Exclude_keyofAddressAttributes.defaultExcludeAttributesType__": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"addressUid":{"dataType":"string","required":true},"line1":{"dataType":"string"},"line2":{"dataType":"string"},"line3":{"dataType":"string"},"city":{"dataType":"string"},"stateProvince":{"dataType":"string"},"postalCode":{"dataType":"string"},"country":{"dataType":"string"}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AddressResponse": {
         "dataType": "refObject",
         "properties": {
-            "addressUid": {"dataType":"string","required":true},
+            "addressId": {"dataType":"string","required":true},
             "line1": {"dataType":"string"},
             "line2": {"dataType":"string"},
             "line3": {"dataType":"string"},
@@ -28,6 +25,21 @@ const models: TsoaRoute.Models = {
             "country": {"dataType":"string"},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Pick_PhoneNumberAttributes.Exclude_keyofPhoneNumberAttributes.defaultExcludeAttributesType__": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"phoneNumberId":{"dataType":"string","required":true},"countryCode":{"dataType":"string","required":true},"areaCode":{"dataType":"string","required":true},"digits":{"dataType":"string","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Omit_PhoneNumberAttributes.defaultExcludeAttributesType_": {
+        "dataType": "refAlias",
+        "type": {"ref":"Pick_PhoneNumberAttributes.Exclude_keyofPhoneNumberAttributes.defaultExcludeAttributesType__","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "PhoneNumberResponse": {
+        "dataType": "refAlias",
+        "type": {"ref":"Omit_PhoneNumberAttributes.defaultExcludeAttributesType_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -59,6 +71,31 @@ export function RegisterRoutes(app: express.Router) {
 
 
               const promise = controller.getAddress.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 200, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/phone-numbers/:phoneNumberId',
+            ...(fetchMiddlewares<RequestHandler>(PhoneNumberController)),
+            ...(fetchMiddlewares<RequestHandler>(PhoneNumberController.prototype.getPhoneNumber)),
+
+            function PhoneNumberController_getPhoneNumber(request: any, response: any, next: any) {
+            const args = {
+                    phoneNumberId: {"in":"path","name":"phoneNumberId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new PhoneNumberController();
+
+
+              const promise = controller.getPhoneNumber.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, 200, next);
             } catch (err) {
                 return next(err);

@@ -6,9 +6,9 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"Pick_AddressAttributes.Exclude_keyofAddressAttributes.defaultExcludeAttributesType__": {
+			"AddressResponse": {
 				"properties": {
-					"addressUid": {
+					"addressId": {
 						"type": "string"
 					},
 					"line1": {
@@ -34,56 +34,56 @@
 					}
 				},
 				"required": [
-					"addressUid"
+					"addressId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Pick_PhoneNumberAttributes.Exclude_keyofPhoneNumberAttributes.defaultExcludeAttributesType__": {
+				"properties": {
+					"phoneNumberId": {
+						"type": "string"
+					},
+					"countryCode": {
+						"type": "string"
+					},
+					"areaCode": {
+						"type": "string"
+					},
+					"digits": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"phoneNumberId",
+					"countryCode",
+					"areaCode",
+					"digits"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
-			"AddressResponse": {
-				"properties": {
-					"addressUid": {
-						"type": "string"
-					},
-					"line1": {
-						"type": "string"
-					},
-					"line2": {
-						"type": "string"
-					},
-					"line3": {
-						"type": "string"
-					},
-					"city": {
-						"type": "string"
-					},
-					"stateProvince": {
-						"type": "string"
-					},
-					"postalCode": {
-						"type": "string"
-					},
-					"country": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"addressUid"
-				],
-				"type": "object",
-				"additionalProperties": false
+			"Omit_PhoneNumberAttributes.defaultExcludeAttributesType_": {
+				"$ref": "#/components/schemas/Pick_PhoneNumberAttributes.Exclude_keyofPhoneNumberAttributes.defaultExcludeAttributesType__",
+				"description": "Construct a type with the properties of T except for those in type K."
+			},
+			"PhoneNumberResponse": {
+				"$ref": "#/components/schemas/Omit_PhoneNumberAttributes.defaultExcludeAttributesType_"
 			}
 		},
 		"securitySchemes": {}
 	},
 	"info": {
-		"title": "tsoa-heritage-type-api",
-		"version": "0.0.1",
-		"description": "tsoa-heritage-type-api",
+		"title": "@tsoa/cli",
+		"version": "5.0.0-alpha.2",
+		"description": "Build swagger-compliant REST APIs using TypeScript and Node",
 		"license": {
-			"name": "SEE LICENSE IN LICENSE"
+			"name": "MIT"
 		},
 		"contact": {
-			"name": "daniel.m.pomerantz@jci.com"
+			"name": "Luke Autry ",
+			"email": "lukeautry@gmail.com",
+			"url": "http://www.lukeautry.com"
 		}
 	},
 	"openapi": "3.0.0",
@@ -108,6 +108,34 @@
 					{
 						"in": "path",
 						"name": "addressId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/phone-numbers/{phoneNumberId}": {
+			"get": {
+				"operationId": "getPhoneNumber",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PhoneNumberResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "phoneNumberId",
 						"required": true,
 						"schema": {
 							"type": "string"

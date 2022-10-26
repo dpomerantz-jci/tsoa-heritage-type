@@ -1,7 +1,7 @@
 import { defaultExcludeAttributesType } from '../utils/flags';
 
 export interface AddressAttributes {
-  addressUid: string;
+  addressId: string;
   line1?: string;
   line2?: string;
   line3?: string;
@@ -14,4 +14,4 @@ export interface AddressAttributes {
   deletedAt?: Date;
 }
 
- export interface AddressResponse extends Omit<AddressAttributes, defaultExcludeAttributesType> {}
+export interface AddressResponse extends Omit<AddressAttributes, defaultExcludeAttributesType> {}
